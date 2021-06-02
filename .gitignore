@@ -26,3 +26,6 @@ venv.bak/
 
 # Fluent transcript files
 *.trn
+
+# CSV files
+*.csv
