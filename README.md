@@ -8,7 +8,7 @@ This repository contains scripts for obtaining residual values generated in [Ans
  * The ```main.py``` contains the whole script that:
  
 	 * Read a ```.trn``` file
-	 * Extract the residual name
+	 * Extract the residual names
 	 * Extract the residual values, line by line
 	 * Save all into a [```Pandas.DataFrame```](https://pandas.pydata.org)
 	 * Plot all residuais using the [```Plotly```](https://plotly.com) package
