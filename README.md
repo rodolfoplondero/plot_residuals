@@ -20,7 +20,7 @@ This repository contains scripts for obtaining residual values generated in [Ans
 
 ## Dependencies
 
-To run this script you need [```Pandas```](https://pandas.pydata.org) and [```Plotly```](https://plotly.com). To install run the following commands:
+To run this script you need [```Pandas```](https://pandas.pydata.org) and [```Plotly```](https://plotly.com). Run the following commands to install it:
 
 ```
 pip install pandas plotly
