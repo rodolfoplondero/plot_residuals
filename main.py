@@ -7,7 +7,8 @@ def main():
     path = '.\\data\\'
     file_name = 'fl-2336'
     file_trn = path + file_name + ".trn"
-
+    save_csv = False
+    
     pattern_data = re.compile(
         "^(\s+(([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+)+)(([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?(:([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?)+)\s+[0-9]+$")
     pattern_title = re.compile(
@@ -39,6 +40,9 @@ def main():
     plot(df[-500:].copy())  # df[-500:] pega as 500 últimas iterações
     # plot(df[:500].copy())   # df[:500] pega as primeiras 500 iterações
     # plot(df[500:1000].copy())   # df[500:1000] pega entre 500 e 1000 iterações
+
+    if save_csv:
+        df.to_csv('.\\output\\residuos.csv', sep=';', index=False)
 
     print("Fim")
 
