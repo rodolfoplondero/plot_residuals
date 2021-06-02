@@ -4,7 +4,9 @@ import re
 
 
 def main():
-    path = '.\\data\\fl-2336.trn'
+    path = '.\\data\\'
+    file_name = 'fl-2336'
+    file_trn = path + file_name + ".trn"
 
     pattern_data = re.compile(
         "^(\s+(([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+)+)(([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?(:([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?)+)\s+[0-9]+$")
@@ -14,11 +16,11 @@ def main():
     columns = []
     lines = []
 
-    for i, line in enumerate(open(path)):
-        for match in re.finditer(pattern_title, line):
-            columns = get_titles(match.group())
+    for i, line in enumerate(open(file_trn)):
+        if not columns:
+            for match in re.finditer(pattern_title, line):
+                columns = get_titles(match.group())
 
-    for i, line in enumerate(open(path)):
         for match in re.finditer(pattern_data, line):
             lines.append(match.group())
 
