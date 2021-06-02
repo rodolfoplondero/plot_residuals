@@ -1,6 +1,6 @@
 import pandas as pd
 import plotly.express as px
-import re
+import re, time
 
 
 def main():
@@ -20,12 +20,16 @@ def main():
     for i, line in enumerate(open(file_trn)):
         if not columns:
             for match in re.finditer(pattern_title, line):
+                print("Getting titles...")
                 columns = get_titles(match.group())
 
         for match in re.finditer(pattern_data, line):
-            lines.append(match.group())
-
-    lines = split_lines(lines.copy())
+            result = match.group().strip().split()
+            
+            if (int(result[0]) % 1000 == 0) and int(result[-1]) != 0:
+                print("Getting iteration: " + result[0])
+                
+            lines.append(result)
 
     # Create a DataFrame and convert data to float
     df = pd.DataFrame(data=lines, columns=columns)
@@ -37,7 +41,7 @@ def main():
     #         df[t] = df[t].astype(float)
 
     # Plot
-    plot(df[-500:].copy())  # df[-500:] pega as 500 últimas iterações
+    plot(df[-1000:].copy())  # df[-500:] pega as 500 últimas iterações
     # plot(df[:500].copy())   # df[:500] pega as primeiras 500 iterações
     # plot(df[500:1000].copy())   # df[500:1000] pega entre 500 e 1000 iterações
 
@@ -57,18 +61,6 @@ def get_titles(line: str):
             titles.append(title)
 
     return titles.copy()
-
-
-def split_lines(lines: list):
-    for i in range(0, len(lines)):
-        line_split = []
-        for x in lines[i].strip().split(" "):
-            if x != "":
-                line_split.append(x)
-
-        lines[i] = line_split
-
-    return lines
 
 
 def plot(df_plot: pd.DataFrame, save_file: bool = True, filename: str = "Teste.html"):
@@ -100,4 +92,6 @@ def plot(df_plot: pd.DataFrame, save_file: bool = True, filename: str = "Teste.h
 
 
 if __name__ == '__main__':
+    start_time = time.time()
     main()
+    print("--- %s seconds ---" % (time.time() - start_time))
